@@ -1,32 +1,26 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { View, Text, StyleSheet, TextInput, Button} from 'react-native';
 
 
-class App extends Component{
-  constructor(props){
-    super(props);
-    this.state = {
-      numero1: '',
-      numero2: '',
-      resultado: ''
-    };
-    
-    this.calcular = this.calcular.bind(this);
-  }
+export default function App(){
 
+  const [numero1, setNumero1] = useState()
+  const [numero2, setNumero2] = useState()
+  const [resultado, setResultado] = useState()
 
-  calcular(){
-    if ( (this.state.numero1 === '') || (this.state.numero2 === '')){
+  function calcular(){
+    alert(numero1)
+    if ( (numero1 === '') || (numero2 === '')){
       alert('É obrigatório digitar os dois números')
       return;
     }
 
-    res = this.state.numero1 * this.state.numero2
-    this.setState({resultado: 'Resultado: '+ res});
+    res = numero1 * numero2
+    setResultado(('Resultado: '+ res));
   }
 
 
-  render(){
+ 
     return(
       <View style={styles.area}>
 
@@ -35,22 +29,22 @@ class App extends Component{
       <TextInput
       style={styles.input}
       placeholder="Digite o primeiro número"
-      onChangeText={ (numero) => this.setState({numero1: numero}) }
+      onChangeText={ (numero) => setNumero1((numero)) }
       />
 
       <TextInput
       style={styles.input}
       placeholder="Digite o segundo número"
-      onChangeText={ (numero) => this.setState({numero2: numero}) }
+      onChangeText={ (numero) => setNumero2((numero)) }
       />
 
-      <Button title="Calcular" onPress={this.calcular} />
+      <Button title="Calcular" onPress={calcular} />
 
 
-      <Text style={styles.texto}> {this.state.resultado} </Text>
+      <Text style={styles.texto}> {resultado} </Text>
       </View>
     );
-  }
+  
 }
 
 
@@ -78,5 +72,3 @@ const styles = StyleSheet.create({
   }
 })
 
-
-export default App;
